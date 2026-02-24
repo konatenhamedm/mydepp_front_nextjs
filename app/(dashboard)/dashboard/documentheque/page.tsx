@@ -9,7 +9,7 @@ import {
     BookOpen, ExternalLink, Filter
 } from "lucide-react";
 import { ClientOnly } from "@/components/ui/client-only";
-import { apiFetch } from "@/lib/axios";
+import { apiFetch, BASE_URL_UPLOAD } from "@/lib/axios";
 
 export default function DocumenthequePage() {
     const { data: session } = useSession();
@@ -111,7 +111,7 @@ export default function DocumenthequePage() {
                                                 <span className="text-[10px] font-bold uppercase tracking-widest">Guide Officiel</span>
                                             </div>
                                             <a
-                                                href={`https://backend.leadagro.net/uploads${doc.path?.path}/${doc.path?.alt}`}
+                                                href={`${BASE_URL_UPLOAD}${doc.path?.path}/${doc.path?.alt}`}
                                                 target="_blank"
                                                 rel="noreferrer"
                                                 className="p-3 bg-rose-50 text-rose-600 rounded-xl hover:bg-rose-600 hover:text-white transition-all shadow-sm"
