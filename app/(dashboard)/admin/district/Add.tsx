@@ -1,0 +1,93 @@
+"use client";
+import React, { useState, useEffect } from "react";
+import { Modal, ModalFooterButtons } from "@/components/ui/Modal";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { apiFetch } from "@/lib/axios";
+import { Navigation } from "lucide-react";
+import { toast } from "sonner";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+interface Props { isOpen: boolean; onClose: () => void; onSuccess: () => void; size?: "sm" | "md" | "lg" | "xl" | "2xl" | "full"; }
+
+export function Add({ isOpen, onClose, onSuccess, size = "md" }: Props) {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [regions, setRegions] = useState<any[]>([]);
+    const [form, setForm] = useState({
+        libelle: "",
+        region: ""
+    });
+
+    useEffect(() => {
+        if (isOpen) {
+            apiFetch("/region/")
+                .then(res => setRegions(Array.isArray(res.data) ? res.data : res.data?.data ?? []))
+                .catch(() => toast.error("Erreur lors du chargement des régions"));
+        }
+    }, [isOpen]);
+
+    const handleSubmit = async (e?: React.FormEvent) => {
+        if (e) e.preventDefault();
+        if (!form.region) return toast.error("Veuillez sélectionner une région");
+        setIsSubmitting(true);
+        try {
+            await apiFetch("/district/create", {
+                method: "POST",
+                data: {
+                    libelle: form.libelle,
+                    region: form.region
+                }
+            });
+            toast.success("District créé !");
+            setForm({ libelle: "", region: "" });
+            onSuccess();
+            onClose();
+        } catch (err: any) {
+            toast.error(err.message || "Erreur lors de la création");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    return (
+        <Modal
+            isOpen={isOpen}
+            onClose={onClose}
+            title={
+                <div className="flex items-center gap-3">
+                    <div className="bg-[#EBF2FF] p-2 rounded-lg text-[#0052CC]"><Navigation className="h-5 w-5" /></div>
+                    Nouveau district
+                </div>
+            }
+            size={size}
+            footer={
+                <ModalFooterButtons
+                    onCancel={onClose}
+                    onConfirm={handleSubmit}
+                    confirmText={isSubmitting ? "Enregistrement..." : "Enregistrer"}
+                    isLoading={isSubmitting}
+                />
+            }
+        >
+            <form onSubmit={handleSubmit} className="space-y-4 py-2">
+                <div className="space-y-2">
+                    <Label>Libellé <span className="text-red-500">*</span></Label>
+                    <Input value={form.libelle} onChange={e => setForm(p => ({ ...p, libelle: e.target.value }))} placeholder="Ex: District Autonome" required />
+                </div>
+                <div className="space-y-2">
+                    <Label>Région <span className="text-red-500">*</span></Label>
+                    <Select value={form.region} onValueChange={v => setForm(p => ({ ...p, region: v }))}>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Sélectionner une région" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {regions.map(r => (
+                                <SelectItem key={r.id} value={r.id.toString()}>{r.libelle}</SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                </div>
+            </form>
+        </Modal>
+    );
+}

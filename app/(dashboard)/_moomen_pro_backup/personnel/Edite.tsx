@@ -1,0 +1,90 @@
+"use client";
+import React, { useState, useEffect } from "react";
+import { Modal, ModalFooterButtons } from "@/components/ui/Modal";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { apiFetch } from "@/lib/axios";
+import { Edit3 } from "lucide-react";
+import { toast } from "sonner";
+
+interface Props { isOpen: boolean; onClose: () => void; onSuccess: () => void; data: any; size?: "sm" | "md" | "lg" | "xl" | "2xl" | "full"; }
+
+export function Edite({ isOpen, onClose, onSuccess, data, size = "lg" }: Props) {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [roles, setRoles] = useState<any[]>([]);
+    const [form, setForm] = useState({ nom: "", prenoms: "", tel: "", email: "", role_marchand_id: "" });
+
+    useEffect(() => {
+        if (data) setForm({ nom: data.nom ?? "", prenoms: data.prenoms ?? "", tel: data.tel ?? "", email: data.email ?? "", role_marchand_id: String(data.role?.id ?? "") });
+    }, [data]);
+
+    useEffect(() => {
+        if (isOpen) {
+            apiFetch("/roles/marchands/all", { provenance: false, method: "GET" })
+                .then(res => setRoles(Array.isArray(res.data) ? res.data : res.data?.data ?? []))
+                .catch(() => { });
+        }
+    }, [isOpen]);
+
+    const handleSubmit = async (e?: React.FormEvent) => {
+        if (e) e.preventDefault();
+        setIsSubmitting(true);
+        try {
+            await apiFetch(`/personnels/${data.id}/update`, { method: "PUT", data: { ...form, role_marchand_id: form.role_marchand_id || null } });
+            toast.success("Employé modifié !"); onSuccess(); onClose();
+        } catch (err: any) { toast.error(err.message || "Erreur"); } finally { setIsSubmitting(false); }
+    };
+
+    const set = (key: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => setForm(p => ({ ...p, [key]: e.target.value }));
+
+    return (
+        <Modal
+            isOpen={isOpen}
+            onClose={onClose}
+            title={
+                <div className="flex items-center gap-3">
+                    <div className="bg-white/20 p-2 rounded-lg"><Edit3 className="h-5 w-5" /></div>
+                    Modifier l'employé
+                </div>
+            }
+            size={size}
+            footer={
+                <ModalFooterButtons
+                    onCancel={onClose}
+                    onConfirm={handleSubmit}
+                    confirmText={isSubmitting ? "Modification..." : "Enregistrer"}
+                    isLoading={isSubmitting}
+                />
+            }
+        >
+            <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                        <Label className="text-[#0052cc] font-semibold">Nom *</Label>
+                        <Input value={form.nom} onChange={set("nom")} required className="border-[#0052cc]/30 focus:border-[#0052cc] rounded-xl" />
+                    </div>
+                    <div className="space-y-2">
+                        <Label className="text-[#0052cc] font-semibold">Prénoms</Label>
+                        <Input value={form.prenoms} onChange={set("prenoms")} className="border-[#0052cc]/30 focus:border-[#0052cc] rounded-xl" />
+                    </div>
+                </div>
+                <div className="space-y-2">
+                    <Label className="text-[#0052cc] font-semibold">Téléphone *</Label>
+                    <Input value={form.tel} onChange={set("tel")} required className="border-[#0052cc]/30 focus:border-[#0052cc] rounded-xl" />
+                </div>
+                <div className="space-y-2">
+                    <Label className="text-[#0052cc] font-semibold">Email</Label>
+                    <Input type="email" value={form.email} onChange={set("email")} className="border-[#0052cc]/30 focus:border-[#0052cc] rounded-xl" />
+                </div>
+                <div className="space-y-2">
+                    <Label className="text-[#0052cc] font-semibold">Rôle</Label>
+                    <select value={form.role_marchand_id} onChange={set("role_marchand_id")}
+                        className="w-full border border-[#0052cc]/30 focus:border-[#0052cc] rounded-xl px-3 py-2 text-sm outline-none">
+                        <option value="">— Sans rôle —</option>
+                        {roles.map(r => <option key={r.id} value={r.id}>{r.libelle}</option>)}
+                    </select>
+                </div>
+            </form>
+        </Modal>
+    );
+}

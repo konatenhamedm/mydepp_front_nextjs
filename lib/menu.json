@@ -1,0 +1,545 @@
+{
+  "ADMINISTRATEUR": [
+    {
+      "title": "Dashboard",
+      "icon": "uil uil-home",
+      "path": "/admin",
+      "exact": true
+    },
+     {
+      "isSectionTitle": true,
+      "title": "GESTION UTILISATEURS"
+    },
+    {
+      "title": "Utilisateurs internes",
+      "icon": "uil uil-users-alt",
+      "path": "/admin/administrateur",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Utilisateurs externes",
+      "icon": "uil uil-users-alt",
+      "path": "/admin/utilisateur_externe",
+      "exact": false
+    },
+    {
+      "isSectionTitle": true,
+      "title": "PARAMETRAGES"
+    },
+    {
+      "title": "Charger les données",
+      "icon": "fa-solid fa-upload",
+      "path": "/admin/upload_data",
+      "exact": false
+    },
+    {
+      "title": "Civilités",
+      "icon": "uil uil-setting",
+      "path": "/admin/civilite",
+      "exact": false
+    },
+    {
+      "title": "Ordre",
+      "icon": "uil uil-setting",
+      "path": "/admin/ordre",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Pays",
+      "icon": "uil uil-setting",
+      "path": "/admin/pays",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Genre",
+      "icon": "uil uil-setting",
+      "path": "/admin/genre",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Situation professionnelle",
+      "icon": "uil uil-setting",
+      "path": "/admin/situation_professionnelle",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Direction",
+      "icon": "uil uil-setting",
+      "path": "/admin/direction",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Racine sequence",
+      "icon": "uil uil-setting",
+      "path": "/admin/racine_sequence",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Région",
+      "icon": "uil uil-setting",
+      "path": "/admin/region",
+      "exact": false
+    }
+    ,
+    {
+      "title": "District",
+      "icon": "uil uil-setting",
+      "path": "/admin/district",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Ville",
+      "icon": "uil uil-setting",
+      "path": "/admin/ville",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Commune",
+      "icon": "uil uil-setting",
+      "path": "/admin/commune",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Type diplome",
+      "icon": "uil uil-setting",
+      "path": "/admin/type_diplome",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Lieu diplome",
+      "icon": "uil uil-setting",
+      "path": "/admin/lieu_diplome",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Statut professionnel",
+      "icon": "uil uil-setting",
+      "path": "/admin/status_pro",
+      "exact": false
+    }
+    ,
+    {
+      "isSectionTitle": true,
+      "title": "Parametres professionnels"
+    }
+    
+    ,
+    {
+      "title": "Types profession",
+      "icon": "uil uil-apps",
+      "path": "/admin/type_profession",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Profession",
+      "icon": "uil uil-apps",
+      "path": "/admin/profession",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Documentation",
+      "icon": "uil uil-apps",
+      "path": "/admin/admin_document",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Destinataire",
+      "icon": "uil uil-apps",
+      "path": "/admin/destinataire",
+      "exact": false
+    }
+    ,
+    {
+      "title": "Générateur code",
+      "icon": "uil uil-apps",
+      "path": "/admin/code_generateur",
+      "exact": false
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Parametres Etablissements"
+    },
+    {
+      "title": "Type personne",
+      "icon": "uil uil-apps",
+      "path": "/admin/type_personne",
+      "exact": false
+    },
+    {
+      "title": "Libellé groupe",
+      "icon": "uil uil-apps",
+      "path": "/admin/groupeLibelle",
+      "exact": false
+    },
+    {
+      "title": "Type document",
+      "icon": "uil uil-apps",
+      "path": "/admin/type_document",
+      "exact": false
+    },
+    {
+      "title": "Niveau intervention",
+      "icon": "uil uil-apps",
+      "path": "/admin/niveau_intervention",
+      "exact": false
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Gestion dossiers"
+    },
+    {
+      "title": "Professionnels",
+      "icon": "uil uil-book-open",
+      "path": "/admin/professionnel",
+      "exact": false
+    },
+    {
+      "title": "Etablissements sante",
+      "icon": "uil uil-book-open",
+      "path": "/admin/etablissements",
+      "exact": false
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Gestion des statistiques"
+    },
+    {
+      "title": "Générales",
+      "icon": "uil uil-chart-bar",
+      "path": "/admin/statistique/general",
+      "exact": false
+    }
+  ],
+  "DIRECTEUR": [
+    {
+      "title": "Dashboard",
+      "icon": "uil uil-apps",
+      "path": "/admin/sous-directeur-dashboard",
+      "exact": true
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Gestion dossiers"
+    },
+     {
+      "title": "Professionnels",
+      "icon": "uil uil-apps",
+      "path": "/admin/professionnel",
+      "exact": false
+    },
+    {
+        "title": "Etablissment",
+        "icon": "uil uil-store",
+        "subItems": [
+            {
+                "title": "Accord de principe",
+                "path": "/admin/accord_de_principe"
+            },
+            {
+                "title": "Ouverture d'exploitation",
+                "path": "/admin/ouverture_exploitation"
+            }
+        ]
+    },
+    
+    
+    {
+      "isSectionTitle": true,
+      "title": "Comptabilité"
+    },
+    {
+      "title": "Historique paiement",
+      "icon": "uil uil-apps",
+      
+      "path":"#",
+      "exact": false
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Gestion statistique"
+    },
+    {
+      "title": "Générales",
+      "icon": "uil uil-apps",
+      "path": "/admin/statistique/general",
+      "exact": false
+    }
+  ],
+  "SOUS-DIRECTEUR-ETAB": [
+    {
+      "title": "Dashboard",
+      "icon": "uil uil-apps",
+      "path": "/admin/sous-directeur-etab-dashboard",
+      "exact": true
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Gestion dossiers"
+    },
+    {
+      "title": "Accord de principe",
+      "icon": "uil uil-apps",
+      "path": "/admin/accord_de_principe",
+      "exact": false
+    },
+    {
+      "title": "Ouverture d'exploitation",
+      "icon": "uil uil-apps",
+      "path": "/admin/ouverture_exploitation",
+      "exact": false
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Comptabilité"
+    },
+    {
+      "title": "Historique paiement",
+      "icon": "uil uil-apps",
+      "path":"#",
+      "exact": false
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Gestion statistique"
+    },
+    {
+      "title": "Générales",
+      "icon": "uil uil-apps",
+      "path": "/admin/statistique/general",
+      "exact": false
+    }
+  ],
+  "SOUS-DIRECTEUR-PROF": [
+     {
+      "title": "Dashboard",
+      "icon": "uil uil-apps",
+      "path": "/admin/sous-directeur-prof-dashboard",
+      "exact": true
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Gestion dossiers"
+    },
+     {
+      "title": "Professionnels",
+      "icon": "uil uil-apps",
+      "path": "/admin/professionnel",
+      "exact": false
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Comptabilité"
+    },
+    {
+      "title": "Historique paiement",
+      "icon": "uil uil-apps",
+      "path":"/admin/historique_paiement",
+      "exact": false
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Gestion statistique"
+    },
+    {
+      "title": "Générales",
+      "icon": "uil uil-apps",
+      "path": "/admin/statistique/general",
+      "exact": false
+    }
+  ],
+  "INSPECTEUR-ETAB": [
+    {
+      "title": "Dashboard",
+      "icon": "uil uil-apps",
+      "path": "/admin/instructeur-dashboard",
+      "exact": true
+    },
+     {
+      "isSectionTitle": true,
+      "title": "Gestion dossiers"
+    },
+     {
+      "title": "Etablissements",
+      "icon": "uil uil-apps",
+      "path": "/admin/inspection_etablissement",
+      "exact": false
+    },
+     {
+      "isSectionTitle": true,
+      "title": "Comptabilité"
+    },
+    {
+      "title": "Historique paiement",
+      "icon": "uil uil-apps",
+      "path":"#",
+      "exact": false
+    }
+  ],
+  "INSTRUCTEUR-PROF": [
+    {
+      "title": "Dashboard",
+      "icon": "uil uil-apps",
+      "path": "/admin/instructeur-dashboard",
+      "exact": true
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Gestion dossiers"
+    },
+     {
+      "title": "Professionnels",
+      "icon": "uil uil-apps",
+      "path": "/admin/professionnel_instructeur",
+      "exact": false
+    },
+     {
+      "isSectionTitle": true,
+      "title": "Comptabilité"
+    },
+    {
+      "title": "Historique paiement",
+      "icon": "uil uil-apps",
+      "path":"/admin/historique_paiement",
+      "exact": false
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Gestion statistique"
+    },
+    {
+      "title": "Générales",
+      "icon": "uil uil-apps",
+      "path": "/admin/statistique/general",
+      "exact": false
+    }
+  ],
+  "INSTRUCTEUR-ETAB": [
+    {
+      "title": "Dashboard",
+      "icon": "uil uil-apps",
+      "path": "/admin/instructeur-dashboard",
+      "exact": true
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Gestion dossiers"
+    },
+     {
+      "title": "Etablissements",
+      "icon": "uil uil-apps",
+      "path": "/admin/ouverture_exploitation_instructeur",
+      "exact": false
+    },
+     {
+      "isSectionTitle": true,
+      "title": "Comptabilité"
+    },
+    {
+      "title": "Historique paiement",
+      "icon": "uil uil-apps",
+      "path":"#",
+      "exact": false
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Gestion statistique"
+    },
+    {
+      "title": "Générales",
+      "icon": "uil uil-apps",
+      "path": "/admin/statistique/general",
+      "exact": false
+    }
+  ],
+  "INSTRUCTEUR-SECOND-PROF": [
+    {
+      "title": "Dashboard",
+      "icon": "uil uil-apps",
+      "path": "/admin/instructeur-dashboard",
+      "exact": true
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Gestion dossiers"
+    },
+     {
+      "title": "Professionnels",
+      "icon": "uil uil-apps",
+      "path": "/admin/professionnel_instructeur_second",
+      "exact": false
+    },
+      {
+      "isSectionTitle": true,
+      "title": "Comptabilité"
+    },
+    {
+      "title": "Historique paiement",
+      "icon": "uil uil-apps",
+      "path":"/admin/historique_paiement",
+      "exact": false
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Gestion statistique"
+    },
+    {
+      "title": "Générales",
+      "icon": "uil uil-apps",
+      "path": "/admin/statistique/general",
+      "exact": false
+    }
+  ],
+  "COMPTABLE": [
+    {
+      "title": "Dashboard",
+      "icon": "uil uil-apps",
+      "path": "/admin/comptable-dashboard",
+      "exact": true
+    },
+     {
+      "isSectionTitle": true,
+      "title": "Comptabilité"
+    },
+    {
+      "title": "Historique paiement",
+      "icon": "uil uil-apps",
+      "path":"/admin/historique_paiement",
+      "exact": false
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Gestion statistique"
+    },
+    {
+      "title": "Générales",
+      "icon": "uil uil-apps",
+      "path": "/admin/statistique/general",
+      "exact": false
+    },
+    {
+      "isSectionTitle": true,
+      "title": "Espace partenaire"
+    },
+    {
+      "title": "Partenaire ",
+      "icon": "uil uil-store",
+      "path": "https://manag-transacts.paysecurehub.com/",
+      "exact": false
+    }
+  ]
+}
