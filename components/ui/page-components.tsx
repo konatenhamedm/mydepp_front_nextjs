@@ -28,7 +28,7 @@ export function PageHeader({ title, description, action, count }: PageHeaderProp
                     )}
                 </div>
                 {description && (
-                    <p className="text-sm text-slate-400 mt-0.5">{description}</p>
+                    <p className="text-sm text-slate-900 font-bold mt-0.5">{description}</p>
                 )}
             </div>
             {action && <div className="flex-shrink-0">{action}</div>}
@@ -76,13 +76,13 @@ export function SearchBar({ value, onChange, placeholder = "Rechercher...", chil
     return (
         <div className="bg-white border border-slate-200 rounded-xl px-4 py-3 flex flex-wrap items-center gap-3">
             <div className="relative flex-1 min-w-[200px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-900" />
                 <input
                     type="text"
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                     placeholder={placeholder}
-                    className="w-full pl-9 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0052CC]/20 focus:border-[#0052CC] focus:bg-white transition-all"
+                    className="w-full pl-9 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 font-medium placeholder-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0052CC]/20 focus:border-[#0052CC] focus:bg-white transition-all"
                 />
             </div>
             {children}
@@ -90,7 +90,7 @@ export function SearchBar({ value, onChange, placeholder = "Rechercher...", chil
                 <button
                     onClick={onRefresh}
                     disabled={isLoading}
-                    className="p-2 rounded-lg border border-slate-200 text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-colors disabled:opacity-50"
+                    className="p-2 rounded-lg border border-slate-200 text-slate-950 font-bold hover:bg-slate-50 transition-colors disabled:opacity-50"
                     title="Actualiser"
                 >
                     <RefreshCw className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
@@ -116,7 +116,7 @@ export function DataTable({ title, titleIcon, children, footer }: DataTableProps
             {title && (
                 <div className="px-5 py-4 border-b border-slate-100 flex items-center gap-2">
                     {titleIcon && <span className="text-[#0052CC]">{titleIcon}</span>}
-                    <h3 className="text-sm font-semibold text-slate-700">{title}</h3>
+                    <h3 className="text-sm font-bold text-slate-900">{title}</h3>
                 </div>
             )}
             <div className="overflow-x-auto">
@@ -168,9 +168,9 @@ export function EmptyState({ message = "Aucun résultat trouvé", icon, cols }: 
     return (
         <tr>
             <td colSpan={cols} className="px-4 py-16 text-center">
-                <div className="flex flex-col items-center gap-3 text-slate-400">
-                    {icon && <div className="opacity-30">{icon}</div>}
-                    <p className="text-sm font-medium">{message}</p>
+                <div className="flex flex-col items-center gap-3 text-slate-800 font-bold">
+                    {icon && <div className="opacity-100">{icon}</div>}
+                    <p className="text-sm">{message}</p>
                 </div>
             </td>
         </tr>
@@ -268,9 +268,9 @@ export function StatusBadge({ status, label }: StatusBadgeProps) {
 // TableCell helpers
 // ─────────────────────────────────────────────────────────────
 export const TD = {
-    base: "px-4 py-3.5 text-sm text-slate-700 border-b border-slate-100",
-    muted: "px-4 py-3.5 text-sm text-slate-400 border-b border-slate-100",
-    mono: "px-4 py-3.5 text-xs font-mono text-[#0052CC] font-semibold border-b border-slate-100",
-    bold: "px-4 py-3.5 text-sm font-semibold text-slate-800 border-b border-slate-100",
+    base: "px-4 py-3.5 text-sm text-slate-900 font-medium border-b border-slate-100",
+    muted: "px-4 py-3.5 text-sm text-slate-800 font-bold border-b border-slate-100",
+    mono: "px-4 py-3.5 text-xs font-mono text-[#0052CC] font-black border-b border-slate-100",
+    bold: "px-4 py-3.5 text-sm font-black text-slate-950 border-b border-slate-100",
     action: "px-4 py-3 border-b border-slate-100",
 };

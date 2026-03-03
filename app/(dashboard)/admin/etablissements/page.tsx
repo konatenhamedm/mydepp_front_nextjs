@@ -100,10 +100,10 @@ export default function EtablissementsPage() {
                                     <TabsTrigger
                                         key={tab.key}
                                         value={tab.key}
-                                        className="rounded-xl px-4 py-2 text-xs font-semibold transition-all data-[state=active]:bg-[#0052CC] data-[state=active]:text-white data-[state=inactive]:text-slate-500 data-[state=inactive]:hover:bg-slate-50"
+                                        className="rounded-xl px-4 py-2 text-xs font-bold transition-all data-[state=active]:bg-[#0052CC] data-[state=active]:text-white data-[state=inactive]:text-slate-800 data-[state=inactive]:hover:bg-slate-50"
                                     >
                                         {tab.label}
-                                        <Badge className={`ml-2 border-none shadow-none ${activeTab === tab.key ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                                        <Badge className={`ml-2 border-none shadow-none font-bold ${activeTab === tab.key ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-900'}`}>
                                             {tabCounts[tab.key] || 0}
                                         </Badge>
                                     </TabsTrigger>
@@ -153,21 +153,21 @@ export default function EtablissementsPage() {
                                             <td className={TD.muted}>{startIndex + index + 1}</td>
                                             <td className={TD.bold}>
                                                 <div className="flex flex-col">
-                                                    <span className="text-sm font-bold text-slate-800">
+                                                    <span className="text-sm font-black text-slate-950">
                                                         {item.personne?.denomination || item.personne?.nomRepresentant || '—'}
                                                     </span>
-                                                    <span className="text-[10px] text-slate-400 font-medium">
+                                                    <span className="text-[10px] text-slate-900 font-bold">
                                                         {item.personne?.typePersonne?.libelle || 'N/A'}
                                                     </span>
                                                 </div>
                                             </td>
                                             <td className={TD.base}>
                                                 <div className="space-y-1">
-                                                    <div className="flex items-center gap-2 text-xs text-slate-600">
-                                                        <Phone className="w-3 h-3 text-slate-400" /> {item.personne?.telephone || '—'}
+                                                    <div className="flex items-center gap-2 text-xs text-slate-900 font-bold">
+                                                        <Phone className="w-3 h-3 text-slate-800" /> {item.personne?.telephone || '—'}
                                                     </div>
-                                                    <div className="flex items-center gap-2 text-xs text-slate-600">
-                                                        <Mail className="w-3 h-3 text-slate-400" /> {item.personne?.emailAutre || item.email || '—'}
+                                                    <div className="flex items-center gap-2 text-xs text-slate-900 font-bold">
+                                                        <Mail className="w-3 h-3 text-slate-800" /> {item.personne?.emailAutre || item.email || '—'}
                                                     </div>
                                                 </div>
                                             </td>
@@ -177,11 +177,11 @@ export default function EtablissementsPage() {
                                                         <UserIcon className="w-3 h-3" /> {item.personne?.imputationData.username}
                                                     </Badge>
                                                 ) : (
-                                                    <span className="text-slate-300 text-xs italic">Non imputé</span>
+                                                    <span className="text-slate-900 text-xs font-black italic">Non imputé</span>
                                                 )}
                                             </td>
                                             <td className={TD.base}>
-                                                <Badge variant="outline" className="bg-slate-50 border-slate-200 text-slate-500 font-medium lowercase">
+                                                <Badge variant="outline" className="bg-slate-100 border-slate-300 text-slate-900 font-black lowercase">
                                                     {item.personne?.status?.replace(/_/g, ' ')}
                                                 </Badge>
                                             </td>

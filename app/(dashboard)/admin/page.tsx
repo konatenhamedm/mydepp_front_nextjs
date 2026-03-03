@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { apiFetch } from "@/lib/axios";
 import { ClientOnly } from '@/components/ui/client-only';
 import { Badge } from "@/components/ui/badge";
@@ -66,7 +67,7 @@ function KpiCard({
     return (
         <div className="bg-white border border-slate-200 rounded-xl p-5 flex flex-col gap-3 hover:border-[#0052CC]/30 hover:shadow-[0_2px_10px_rgba(0,82,204,0.08)] transition-all duration-200">
             <div className="flex items-start justify-between">
-                <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{title}</p>
+                <p className="text-xs font-black text-slate-800 uppercase tracking-wider">{title}</p>
                 <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center text-white"
                     style={{ backgroundColor: accent || BRAND }}
@@ -75,7 +76,7 @@ function KpiCard({
                 </div>
             </div>
             <p className="text-3xl font-bold text-slate-900 tabular-nums">{value}</p>
-            {subtitle && <p className="text-xs text-slate-400">{subtitle}</p>}
+            {subtitle && <p className="text-xs text-slate-900 font-bold">{subtitle}</p>}
         </div>
     );
 }
@@ -99,6 +100,7 @@ function ChartCard({ title, children }: { title: string; children: React.ReactNo
 // ─────────────────────────────────────────
 export default function AdminDashboard() {
     const { data: session } = useSession();
+    const router = useRouter();
     const [selectedPeriod, setSelectedPeriod] = useState<"mois" | "trimestre" | "semestre" | "annee">("mois");
     const [selectedMonth, setSelectedMonth] = useState(String(new Date().getMonth() + 1));
     const [selectedTranche, setSelectedTranche] = useState("1");
@@ -108,7 +110,29 @@ export default function AdminDashboard() {
     const [dataView, setDataView] = useState<any>(null);
     const [yearsOptions, setYearsOptions] = useState<string[]>(["2024", "2025"]);
 
-    const isAdminGeneral = (session?.user as any)?.type === "ADMINISTRATEUR";
+    const userType = (session?.user as any)?.type;
+    const isAdminGeneral = userType === "ADMINISTRATEUR";
+
+    // ─── Redirect non-admin roles to their specific dashboard ───────────────
+    useEffect(() => {
+        if (!session) return;
+        const redirectMap: Record<string, string> = {
+            "INSTRUCTEUR": "/admin/instructeur-dashboard",
+            "INSTRUCTEUR-PROF": "/admin/instructeur-dashboard",
+            "INSTRUCTEUR-SECOND-PROF": "/admin/instructeur-dashboard",
+            "INSTRUCTEUR-ETAB": "/admin/instructeur-etab-dashboard",
+            "INSTRUCTEUR-SECOND-ETAB": "/admin/instructeur-etab-dashboard",
+            "INSPECTEUR": "/admin/instructeur-dashboard",
+            "INSPECTEUR-ETAB": "/admin/instructeur-dashboard",
+            "DIRECTEUR": "/admin/directeur-dashboard",
+            "SOUS-DIRECTEUR-PROF": "/admin/sous-directeur-prof-dashboard",
+            "SOUS-DIRECTEUR-ETAB": "/admin/sous-directeur-etab-dashboard",
+            "COMPTABLE": "/admin/comptable-dashboard",
+        };
+        if (userType && redirectMap[userType]) {
+            router.replace(redirectMap[userType]);
+        }
+    }, [session, userType]);
 
     const monthsOfQuarter: Record<string, string[]> = {
         '1': ['01', '02', '03'], '2': ['04', '05', '06'],
@@ -202,7 +226,7 @@ export default function AdminDashboard() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <h1 className="text-xl font-bold text-slate-900">Tableau de bord</h1>
-                        <p className="text-sm text-slate-400 mt-0.5">Vue d'ensemble de la plateforme MyDepp</p>
+                        <p className="text-sm text-slate-900 font-bold mt-0.5">Vue d'ensemble de la plateforme MyDepp</p>
                     </div>
                     <button
                         onClick={fetchData}
@@ -216,7 +240,7 @@ export default function AdminDashboard() {
                 {/* ── Filtres ── */}
                 <div className="bg-white border border-slate-200 rounded-xl px-5 py-4 flex flex-wrap items-end gap-3">
                     <div className="flex flex-col gap-1">
-                        <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Période</label>
+                        <label className="text-[11px] font-black text-slate-900 uppercase tracking-wider">Période</label>
                         <select className={selectCls} value={selectedPeriod} onChange={e => setSelectedPeriod(e.target.value as any)}>
                             <option value="mois">Mois</option>
                             <option value="trimestre">Trimestre</option>
@@ -227,7 +251,7 @@ export default function AdminDashboard() {
 
                     {selectedPeriod === 'mois' && (
                         <div className="flex flex-col gap-1">
-                            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Mois</label>
+                            <label className="text-[11px] font-black text-slate-900 uppercase tracking-wider">Mois</label>
                             <select className={selectCls} value={selectedMonth} onChange={e => setSelectedMonth(e.target.value)}>
                                 {MONTHS.map((m, i) => <option key={i} value={String(i + 1)}>{m}</option>)}
                             </select>
@@ -236,7 +260,7 @@ export default function AdminDashboard() {
 
                     {(selectedPeriod === 'trimestre' || selectedPeriod === 'semestre') && (
                         <div className="flex flex-col gap-1">
-                            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                            <label className="text-[11px] font-black text-slate-900 uppercase tracking-wider">
                                 {selectedPeriod === 'trimestre' ? 'Trimestre' : 'Semestre'}
                             </label>
                             <select className={selectCls} value={selectedTranche} onChange={e => setSelectedTranche(e.target.value)}>
@@ -249,7 +273,7 @@ export default function AdminDashboard() {
                     )}
 
                     <div className="flex flex-col gap-1">
-                        <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Année</label>
+                        <label className="text-[11px] font-black text-slate-900 uppercase tracking-wider">Année</label>
                         <select className={selectCls} value={selectedYear} onChange={e => setSelectedYear(e.target.value)}>
                             {yearsOptions.map(y => <option key={y} value={y}>{y}</option>)}
                         </select>
@@ -366,7 +390,7 @@ export default function AdminDashboard() {
                                                     <div key={i} className="flex items-center gap-3">
                                                         <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }} />
                                                         <div>
-                                                            <p className="text-xs text-slate-400">{item.name}</p>
+                                                            <p className="text-xs text-slate-900 font-bold">{item.name}</p>
                                                             <p className="text-base font-bold text-slate-800 tabular-nums">{item.value}</p>
                                                         </div>
                                                     </div>
@@ -386,9 +410,9 @@ export default function AdminDashboard() {
                                         <table className="w-full text-sm">
                                             <thead>
                                                 <tr className="bg-slate-50">
-                                                    <th className="text-left px-5 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Pays</th>
-                                                    <th className="text-right px-5 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Utilisateurs</th>
-                                                    <th className="text-right px-5 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Part</th>
+                                                    <th className="text-left px-5 py-3 text-xs font-black text-slate-900 uppercase tracking-wider">Pays</th>
+                                                    <th className="text-right px-5 py-3 text-xs font-black text-slate-900 uppercase tracking-wider">Utilisateurs</th>
+                                                    <th className="text-right px-5 py-3 text-xs font-black text-slate-900 uppercase tracking-wider">Part</th>
                                                 </tr>
                                             </thead>
                                             <tbody className="divide-y divide-slate-100">
@@ -404,7 +428,7 @@ export default function AdminDashboard() {
                                                     </tr>
                                                 ))}
                                                 {(!dataView.users?.by_pays || dataView.users.by_pays.length === 0) && (
-                                                    <tr><td colSpan={3} className="px-5 py-8 text-center text-slate-400 text-sm">Aucune donnée disponible</td></tr>
+                                                    <tr><td colSpan={3} className="px-5 py-8 text-center text-slate-900 font-black text-sm">Aucune donnée disponible</td></tr>
                                                 )}
                                             </tbody>
                                         </table>
@@ -414,12 +438,12 @@ export default function AdminDashboard() {
                         )}
                     </>
                 ) : (
-                    <div className="bg-white border-2 border-dashed border-slate-200 rounded-xl h-80 flex flex-col items-center justify-center gap-4 text-slate-400">
+                    <div className="bg-white border-2 border-dashed border-slate-200 rounded-xl h-80 flex flex-col items-center justify-center gap-4 text-slate-900 font-bold">
                         <LayoutDashboard className="w-12 h-12 opacity-30" />
-                        <p className="text-sm font-medium">Impossible de charger les données</p>
+                        <p className="text-sm font-bold">Impossible de charger les données</p>
                         <button
                             onClick={fetchData}
-                            className="px-4 py-2 text-sm font-medium border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors text-slate-600"
+                            className="px-4 py-2 text-sm font-bold border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors text-black"
                         >
                             Réessayer
                         </button>

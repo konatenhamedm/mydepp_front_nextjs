@@ -25,9 +25,8 @@ function formatDate(dateString: string) {
 }
 
 const statusColors: any = {
-    SUCCESS: "bg-emerald-100 text-emerald-800 border-emerald-200",
-    FAILED: "bg-red-100 text-red-800 border-red-200",
-    PENDING: "bg-amber-100 text-amber-800 border-amber-200",
+    1: "bg-emerald-100 text-emerald-800 border-emerald-200 font-bold",
+    0: "bg-red-100 text-red-800 border-red-200 font-bold",
 };
 
 export default function HistoriquePaiementPage() {
@@ -110,7 +109,7 @@ export default function HistoriquePaiementPage() {
                 />
 
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 space-y-4">
-                    <div className="flex items-center gap-2 mb-2 text-sm font-semibold text-slate-700">
+                    <div className="flex items-center gap-2 mb-2 text-sm font-black text-slate-950">
                         <Filter className="w-4 h-4" /> Filtres
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -185,8 +184,8 @@ export default function HistoriquePaiementPage() {
                                         <td className={TD.base}>{item?.channel || "—"}</td>
                                         <td className={TD.base}>{item?.email || "—"}</td>
                                         <td className={TD.base}>
-                                            <Badge className={statusColors[item.state] || "bg-slate-100 text-slate-800"}>
-                                                {item.state || "INCONNU"}
+                                            <Badge className={statusColors[item.state] || "bg-slate-100 text-slate-800 font-bold"}>
+                                                {item.state === 1 ? "SUCCESS" : "FAILED"}
                                             </Badge>
                                         </td>
                                         <td className="px-4 py-3 text-sm font-bold text-slate-900 border-b border-slate-100 whitespace-nowrap text-right">
@@ -196,10 +195,10 @@ export default function HistoriquePaiementPage() {
 
                                         <td className={TD.action}>
                                             <div className="flex items-center justify-end gap-2">
-                                                <button onClick={() => handleOpenModal("view", item)} className="p-2 text-slate-400 hover:text-emerald-600 transition-colors" title="Voir les détails">
+                                                <button onClick={() => handleOpenModal("view", item)} className="p-2 text-slate-800 hover:text-emerald-700 font-bold transition-colors" title="Voir les détails">
                                                     <Search className="h-4 w-4" />
                                                 </button>
-                                                <button onClick={() => handleOpenModal("print", item)} className="p-2 text-slate-400 hover:text-[#0052CC] transition-colors" title="Imprimer le reçu">
+                                                <button onClick={() => handleOpenModal("print", item)} className="p-2 text-slate-800 hover:text-[#0052CC] font-bold transition-colors" title="Imprimer le reçu">
                                                     <Printer className="h-4 w-4" />
                                                 </button>
                                             </div>

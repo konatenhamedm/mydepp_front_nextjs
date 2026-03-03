@@ -11,9 +11,9 @@ interface Props {
 export function DocViewer({ url, alt = "Document" }: Props) {
     if (!url) {
         return (
-            <div className="flex flex-col items-center justify-center p-10 bg-slate-50 border border-slate-100 rounded-xl text-slate-400 gap-3">
-                <FileText className="w-10 h-10 opacity-50" />
-                <span className="text-sm font-medium">Aucun document disponible</span>
+            <div className="flex flex-col items-center justify-center p-10 bg-slate-50 border border-slate-100 rounded-xl text-slate-900 font-bold gap-3">
+                <FileText className="w-10 h-10 opacity-70" />
+                <span className="text-sm">Aucun document disponible</span>
             </div>
         );
     }
@@ -30,9 +30,9 @@ export function DocViewer({ url, alt = "Document" }: Props) {
                     className="w-full bg-white"
                     title={alt}
                 >
-                    <p className="p-4 text-center text-slate-500">
+                    <p className="p-4 text-center text-slate-900 font-bold">
                         Votre navigateur ne prend pas en charge les PDF.{" "}
-                        <a href={url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+                        <a href={url} target="_blank" rel="noopener noreferrer" className="text-blue-700 font-black underline">
                             Télécharger le fichier
                         </a>
                         .
@@ -40,9 +40,9 @@ export function DocViewer({ url, alt = "Document" }: Props) {
                 </iframe>
             ) : (
                 <div className="p-4 flex flex-col items-center gap-4 w-full">
-                    <div className="flex items-center gap-2 text-slate-500 text-sm font-medium w-full justify-between pb-2 border-b border-slate-200">
+                    <div className="flex items-center gap-2 text-slate-900 text-sm font-bold w-full justify-between pb-2 border-b border-slate-200">
                         <span className="flex items-center gap-2"><ImageIcon className="w-4 h-4" /> {alt}</span>
-                        <a href={url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Ouvrir</a>
+                        <a href={url} target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:underline font-black">Ouvrir</a>
                     </div>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img

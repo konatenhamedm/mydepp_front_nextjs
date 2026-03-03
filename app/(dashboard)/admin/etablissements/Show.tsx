@@ -44,11 +44,11 @@ export function Show({ isOpen, onClose, data, size = "lg" }: Props) {
                             {p.denomination || p.nomRepresentant || 'Établissement sans nom'}
                         </h2>
                         <div className="flex flex-wrap gap-4 items-center">
-                            <span className="flex items-center gap-2 text-sm text-slate-500 font-medium">
-                                <Landmark className="w-4 h-4 text-slate-300" /> {p.typeEtablissement?.libelle || 'Type non spécifié'}
+                            <span className="flex items-center gap-2 text-sm text-slate-900 font-black">
+                                <Landmark className="w-4 h-4 text-slate-800" /> {p.typeEtablissement?.libelle || 'Type non spécifié'}
                             </span>
-                            <span className="flex items-center gap-2 text-sm text-slate-500 font-medium border-l border-slate-200 pl-4">
-                                <Hash className="w-4 h-4 text-slate-300" /> ID Compte: #{data.id}
+                            <span className="flex items-center gap-2 text-sm text-slate-900 font-black border-l border-slate-300 pl-4">
+                                <Hash className="w-4 h-4 text-slate-800" /> ID Compte: #{data.id}
                             </span>
                         </div>
                     </div>
@@ -58,7 +58,7 @@ export function Show({ isOpen, onClose, data, size = "lg" }: Props) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-2">
                     {/* Colonne 1: Identification & Contacts */}
                     <div className="space-y-6">
-                        <h3 className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] flex items-center gap-2">
+                        <h3 className="text-xs font-black text-slate-900 uppercase tracking-[0.2em] flex items-center gap-2">
                             <ShieldCheck className="w-4 h-4" /> Identification & Contacts
                         </h3>
                         <div className="space-y-4">
@@ -71,7 +71,7 @@ export function Show({ isOpen, onClose, data, size = "lg" }: Props) {
 
                     {/* Colonne 2: Localisation & Suivi */}
                     <div className="space-y-6">
-                        <h3 className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] flex items-center gap-2">
+                        <h3 className="text-xs font-black text-slate-900 uppercase tracking-[0.2em] flex items-center gap-2">
                             <MapPin className="w-4 h-4" /> Localisation & Suivi
                         </h3>
                         <div className="space-y-4">
@@ -85,7 +85,7 @@ export function Show({ isOpen, onClose, data, size = "lg" }: Props) {
                                         {p.imputationData.username}
                                     </div>
                                 ) : (
-                                    <span className="text-emerald-400 text-xs italic">Aucun agent assigné</span>
+                                    <span className="text-emerald-900 text-xs font-black italic">Aucun agent assigné</span>
                                 )}
                             </div>
                         </div>
@@ -95,9 +95,9 @@ export function Show({ isOpen, onClose, data, size = "lg" }: Props) {
                 {/* Footer Insight */}
                 <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex gap-4">
                     <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center flex-shrink-0">
-                        <Info className="w-5 h-5 text-slate-300" />
+                        <Info className="w-5 h-5 text-slate-900" />
                     </div>
-                    <p className="text-xs text-slate-500 leading-relaxed">
+                    <p className="text-xs text-slate-900 font-bold leading-relaxed">
                         Ce profil d'établissement regroupe toutes les informations administratives déclarées lors du dépôt de dossier.
                         Le statut actuel <strong>{p.status}</strong> détermine les étapes suivantes du workflow d'homologation.
                     </p>
@@ -113,10 +113,10 @@ function InfoRow({ icon, label, value }: { icon: React.ReactNode, label: string,
     }
     return (
         <div className="flex items-start gap-4">
-            <div className="mt-1 text-slate-300">{icon}</div>
+            <div className="mt-1 text-slate-900">{icon}</div>
             <div>
-                <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">{label}</span>
-                <span className="text-sm font-semibold text-slate-700">{value}</span>
+                <span className="block text-[10px] font-black text-slate-900 uppercase tracking-wider">{label}</span>
+                <span className="text-sm font-bold text-slate-800">{value}</span>
             </div>
         </div>
     );

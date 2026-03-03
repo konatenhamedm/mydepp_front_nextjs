@@ -88,7 +88,7 @@ export function Imputation({ isOpen, onClose, data, onSuccess, size = "md" }: Pr
         >
             <div className="py-2 space-y-4">
                 <div className="space-y-2">
-                    <Label className="text-sm font-semibold text-slate-700">Sélectionner l'instructeur <span className="text-red-500">*</span></Label>
+                    <Label className="text-sm font-black text-slate-900">Sélectionner l'instructeur <span className="text-red-500">*</span></Label>
                     <Select value={selectedInstructor} onValueChange={setSelectedInstructor} disabled={isLoadingInstructors}>
                         <SelectTrigger className="w-full h-12 bg-slate-50 border-slate-200">
                             <SelectValue placeholder={isLoadingInstructors ? "Chargement..." : "Choisir un instructeur"} />
@@ -103,8 +103,8 @@ export function Imputation({ isOpen, onClose, data, onSuccess, size = "md" }: Pr
                     </Select>
                 </div>
 
-                <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 mt-4">
-                    <p className="text-xs text-slate-500 leading-relaxed">
+                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 mt-4">
+                    <p className="text-xs text-slate-900 font-bold leading-relaxed">
                         L'imputation affectera ce dossier à l'instructeur sélectionné pour analyse et suite du traitement. L'instructeur sera notifié dans son espace.
                     </p>
                 </div>

@@ -146,7 +146,7 @@ export default function ProfessionnelInscriptionPage() {
     }, []);
 
     const handleTypeProfessionChange = async (selected: any) => {
-        setFormData(prev => ({ ...prev, typeProfession: selected?.value, profession: '' }));
+        setFormData((prev: any) => ({ ...prev, typeProfession: selected?.value, profession: '' }));
         if (selected) {
             try {
                 const res = await apiFetch(`/profession/get/profession/typeProfession/${selected.value}`);
@@ -168,7 +168,7 @@ export default function ProfessionnelInscriptionPage() {
                 setIsValidNumeroInscription(true);
                 setNumeroInscriptionErrors("");
                 // Auto-fill available data like Svelte
-                setFormData(prev => ({
+                setFormData((prev: any) => ({
                     ...prev,
                     nom: res.data.nom || prev.nom,
                     prenoms: res.data.prenoms || prev.prenoms,

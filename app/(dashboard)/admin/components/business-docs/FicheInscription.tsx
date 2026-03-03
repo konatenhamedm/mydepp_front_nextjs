@@ -27,36 +27,43 @@ export function FicheInscription({ data }: Props) {
                 const lineHeight = 7;
                 let yPos = margin;
 
-                // Logo placeholder
-                const logoWidth = 30;
-                const logoHeight = 30;
-                const logoX = (pageWidth - logoWidth) / 2;
+                // 1. En-tête officiel
+                doc.setFontSize(8);
+                doc.setTextColor(50, 50, 50);
+                doc.setFont("helvetica", "bold");
+                doc.text("RÉPUBLIQUE DE CÔTE D'IVOIRE", 14, 15);
+                doc.setFont("helvetica", "normal");
+                doc.text("Union - Discipline - Travail", 14, 20);
+                doc.setDrawColor(200);
+                doc.line(14, 23, 60, 23);
 
+                doc.setFontSize(8);
+                doc.text("MINISTÈRE DE LA SANTÉ, DE L'HYGIÈNE PUBLIQUE", 14, 28);
+                doc.text("ET DE LA COUVERTURE MALADIE UNIVERSELLE", 14, 32);
+
+                doc.setFont("helvetica", "bold");
+                doc.setTextColor(0, 82, 204);
+                doc.text("DIRECTION DES ÉTABLISSEMENTS PRIVÉS", 14, 38);
+                doc.text("ET PROFESSIONS SANITAIRES (DEPPS)", 14, 42);
+
+                // 2. Logo au centre droit (aligné propre)
                 try {
-                    doc.addImage("https://mydepps.pages.dev/_files/logo-depps.png", "PNG", logoX, yPos, logoWidth, logoHeight);
+                    doc.addImage("https://mydepps.pages.dev/_files/logo-depps.png", "PNG", pageWidth - 35, 10, 28, 28);
                 } catch (e) {
-                    doc.setFontSize(10);
-                    doc.text("Logo DEPPS", pageWidth / 2, yPos + 15, { align: "center" });
+                    // fallback
                 }
 
-                yPos += logoHeight + 10;
+                yPos = 60; // Position de départ après le header
 
                 // Titre
-                doc.setFontSize(16);
+                doc.setFontSize(18);
+                doc.setTextColor(0, 0, 0);
                 doc.setFont("helvetica", "bold");
                 doc.text("FICHE D'INSCRIPTION", pageWidth / 2, yPos, { align: "center" });
-                yPos += 10;
-
-                // Sous-titre
-                doc.setFontSize(10);
-                doc.setFont("helvetica", "normal");
-                doc.text("Ministère de la Santé, de l'Hygiène Publique et de la Couverture Maladie Universelle", pageWidth / 2, yPos, { align: "center" });
-                doc.text("Direction des Établissements Privés et Professions Sanitaires (DEPPS)", pageWidth / 2, yPos + 5, { align: "center" });
-
                 yPos += 15;
+
                 doc.setDrawColor(200, 200, 200);
                 doc.line(margin, yPos, pageWidth - margin, yPos);
-
                 yPos += 10;
 
                 // Informations
@@ -127,10 +134,22 @@ export function FicheInscription({ data }: Props) {
                 }
 
                 // Pied de page
-                doc.setFontSize(10);
-                doc.setTextColor(100, 100, 100);
-                doc.text(`Fiche générée le ${format(new Date(), "dd/MM/yyyy à HH:mm:ss")}`, pageWidth / 2, 280, { align: "center" });
-                doc.text("DEPPS - Ministère de la Santé de Côte d'Ivoire", pageWidth / 2, 285, { align: "center" });
+                const footerY = doc.internal.pageSize.getHeight() - 15;
+                doc.setFontSize(8);
+                doc.setTextColor(150, 150, 150);
+
+                // Ligne de séparation
+                doc.setDrawColor(200, 200, 200);
+                doc.line(14, footerY - 5, pageWidth - 14, footerY - 5);
+
+                doc.text("DEPPS - Ministère de la Santé de Côte d'Ivoire", 14, footerY);
+                doc.text("Contacts: (+225) 27-20-21-08-42 / info@depps.ci", 14, footerY + 5);
+                doc.text("MyDEPP plateforme - Sygape CI", 14, footerY + 10);
+
+                doc.text(`Généré le: ${format(new Date(), "dd/MM/yyyy HH:mm")}`, pageWidth - 14, footerY, { align: "right" });
+                const totalPages = doc.getNumberOfPages();
+                doc.text(`Page 1 / ${totalPages}`, pageWidth - 14, footerY + 5, { align: "right" });
+                doc.text("Document officiel e-DEPPS", pageWidth - 14, footerY + 10, { align: "right" });
 
                 const pdfBlob = doc.output("blob");
                 setPdfUrl(URL.createObjectURL(pdfBlob));

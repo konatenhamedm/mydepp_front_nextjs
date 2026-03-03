@@ -42,6 +42,9 @@ const config: Config = {
         'batiflow': '0 10px 40px -10px rgba(0, 82, 204, 0.3)',
         'batiflow-lg': '0 20px 50px -15px rgba(0, 82, 204, 0.4)',
       },
+      fontFamily: {
+        sans: ["var(--font-outfit)", "Inter", "sans-serif"],
+      },
     },
   },
   plugins: [],

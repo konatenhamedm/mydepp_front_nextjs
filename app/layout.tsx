@@ -1,12 +1,15 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
-
-const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: '--font-outfit',
+  display: 'swap',
+});
 
 /* export const metadata: Metadata = {
   title: "Tableau de Bord",
@@ -46,7 +49,11 @@ export default async function RootLayout({
           `}
         </style>
       </head>
-      <body className={inter.className}> <Providers session={session}>{children}</Providers></body>
+      <body className={`${outfit.className} ${outfit.variable} antialiased bg-slate-50/50`}>
+        <Providers session={session}>
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }

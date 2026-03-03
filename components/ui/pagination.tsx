@@ -51,18 +51,18 @@ export const Pagination = ({
   const btnBase =
     "inline-flex items-center justify-center h-8 min-w-[32px] px-2 rounded-lg text-sm font-medium transition-colors duration-150 border";
   const btnInactive =
-    "border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:border-slate-300";
+    "border-slate-200 bg-white text-slate-900 font-bold hover:bg-slate-50 hover:border-slate-300";
   const btnActive =
-    "border-[#0052CC] bg-[#0052CC] text-white shadow-sm";
+    "border-[#0052CC] bg-[#0052CC] text-white shadow-sm font-bold";
   const btnDisabled =
-    "border-slate-100 bg-slate-50 text-slate-300 cursor-not-allowed";
+    "border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed font-medium";
 
   return (
     <div className={`flex items-center justify-between px-1 py-3 ${className}`}>
       {/* Info */}
-      <p className="text-xs text-slate-400">
-        <span className="font-medium text-slate-600">{startItem}–{endItem}</span> sur{" "}
-        <span className="font-medium text-slate-600">{totalItems}</span> résultats
+      <p className="text-xs text-slate-950 font-black">
+        <span className="font-black text-slate-900">{startItem}–{endItem}</span> sur{" "}
+        <span className="font-black text-slate-900">{totalItems}</span> résultats
       </p>
 
       {/* Controls */}
@@ -82,7 +82,7 @@ export const Pagination = ({
           <div className="flex items-center gap-1">
             {getPageNumbers().map((page, i) =>
               page === "…" ? (
-                <span key={`ellipsis-${i}`} className="px-1 text-slate-400 text-sm">
+                <span key={`ellipsis-${i}`} className="px-1 text-slate-900 font-black text-sm">
                   …
                 </span>
               ) : (
